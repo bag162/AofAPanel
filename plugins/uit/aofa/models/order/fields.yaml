@@ -1,0 +1,52 @@
+fields:
+    type_id:
+        label: 'Тип заявки'
+        showSearch: true
+        span: auto
+        readOnly: 1
+        type: dropdown
+    created_at:
+        label: 'Дата заявки'
+        mode: datetime
+        span: auto
+        readOnly: 1
+        type: datepicker
+    data_partial:
+        span: full
+        path: $/uit/aofa/partials/_order_data.htm
+        type: partial
+    total:
+        label: Итого
+        span: auto
+        readOnly: 1
+        type: number
+    key:
+        label: 'Api ключь'
+        span: auto
+        readOnly: 1
+        type: text
+tabs:
+    fields:
+        status_id:
+            label: 'Статус заявки'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: dropdown
+            tab: 'Действия админа'
+        files:
+            label: 'Прикрепить файлы'
+            mode: file
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: 'Действия админа'
+        note:
+            label: 'Заметка администратора'
+            size: large
+            span: auto
+            type: textarea
+            tab: 'Действия админа'

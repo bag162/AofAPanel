@@ -1,0 +1,4 @@
+<ul>
+<li>TNManager: <?php if($record->tn_manager_end) {echo ($record->tn_manager_end->isPast())?'Срок истек':$record->tn_manager_end->diffForHumans(); }?></li> 
+<li>ПО SMS Service: <?php if($record->sms_service_end) { echo ($record->sms_service_end->isPast())?'Срок истек':$record->sms_service_end->diffForHumans();} ?></li>
+</ul>

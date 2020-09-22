@@ -1,0 +1,9 @@
+fields:
+    name:
+        label: 'Название статуса'
+        span: auto
+        type: text
+    color:
+        label: 'Выберите цвет'
+        span: auto
+        type: colorpicker

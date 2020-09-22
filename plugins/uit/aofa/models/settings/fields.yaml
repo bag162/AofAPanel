@@ -1,0 +1,95 @@
+tabs:
+    fields:
+        countries:
+            label: Страны
+            prompt: 'Добавить страну'
+            span: auto
+            type: repeater
+            tab: 'Покупка аккаунтов'
+            form:
+                fields:
+                    name:
+                        label: Название
+                        span: auto
+                        type: text
+                    price:
+                        label: Стоимость
+                        span: auto
+                        type: number
+        payments:
+            label: 'Реквизиты для оплаты'
+            prompt: Добавить
+            span: auto
+            type: repeater
+            tab: 'Реквизиты для оплаты'
+            form:
+                fields:
+                    logo:
+                        label: 'Реквизиты для оплаты'
+                        mode: file
+                        prompt: Добавить
+                        span: auto
+                        type: mediafinder
+                    name:
+                        label: Название
+                        span: left
+                        type: text
+                    uid:
+                        label: 'Номер карты или кошелька'
+                        span: auto
+                        type: text
+        restore_price:
+            label: 'Цена на восстановление аккаунтов'
+            span: auto
+            type: number
+            tab: 'Восстановление аккаунтов'
+        session_price:
+            label: 'Цена на регистрацию сессий у аккаунтов'
+            span: auto
+            type: number
+            tab: 'Регистрация сессий'
+        arenda_price:
+            label: 'Цена на продление лицензии ПО'
+            span: auto
+            type: number
+            tab: 'Продление аренды ПО'
+        price_tnmanager_admin:
+            label: 'TNManager цена за администрирование'
+            span: auto
+            type: number
+            tab: 'Администрирование серверов'
+        price_sms_admin:
+            label: 'SMS Service цена за администрирование'
+            span: auto
+            type: number
+            tab: 'Администрирование серверов'
+        social_vk:
+            label: 'Ссылка вконтакте'
+            span: auto
+            type: text
+            tab: Контакты
+        social_telegram:
+            label: 'Ссылка на телеграм'
+            span: auto
+            type: text
+            tab: Контакты
+        email:
+            label: Почта
+            span: auto
+            type: text
+            tab: Контакты
+        phone:
+            label: Телефон
+            span: auto
+            type: text
+            tab: Контакты
+        link_instruction:
+            label: 'Инструкции пользования'
+            span: auto
+            type: text
+            tab: Контакты
+        link_price:
+            label: 'Ссылка на прайс'
+            span: auto
+            type: text
+            tab: Контакты

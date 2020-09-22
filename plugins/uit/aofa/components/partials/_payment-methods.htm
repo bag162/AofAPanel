@@ -1,0 +1,73 @@
+
+  <div>
+ <div class="container_modal_title wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        			<p class="modal_title">
+        				Тип выполненного перевода
+        			</p>
+              {% if this.page.id == 'home' %}
+                    <a href="#modal_footer" class="modal_pricelist_button">
+                        Прайс лист
+                    </a> 
+
+                    {% endif %}
+        		</div>
+    <div class="modul_button_pay modal_type_dop" :class="{'active':paymentType}">
+      Реквизиты для перевода
+    </div>
+    <div class="modal_first modal_wrapper">
+      <div class="dm-table">
+        <div class="dm-cell">
+          <div class="modal_content">
+            <div class="modal_header">
+              <img src="/themes/aofa/assets/img/log_modal.png" alt="">
+            </div>
+            <p class="modal_title modal_title_acaunt">
+              Выберете способ оплаты
+            </p>
+            <div class="modal_items">
+              {% set payments = aofa_settings('payments') %}
+              {% for payment in payments %}
+              <input id="payment_{{loop.index}}" type="radio" name="data[payment_method]" value="{{payment.name}}" x-model="paymentType">
+              <label for="payment_{{loop.index}}"> 
+                <img src="{{payment.logo|media}}" alt="{{payment.name}}"> {{payment.uid}}
+              </label>
+              {% endfor %} 
+            </div>
+            <button class="modal_button_form" type="button">
+              Выбрать оплату
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal_type_dop form_contacts form_contacts_type">
+      <div class="form_contacts_container">
+        <p class="modal_title_field">
+          Дата перевода 
+          <span>*
+          </span>
+        </p>
+        <input  class="modal_date_dop modal_date" placeholder="чч/мм/год" type="date" id="modal_1_date_1" name="data[payment_date]">
+      </div>
+      <div class="form_contacts_container">
+        <p class="modal_title_field">
+          Сумма перевода
+          <span>*
+          </span>
+        </p>
+        <input  class="modal_date_dop modal_summ" type="modal_1_summ_1" placeholder="0 руб." name="data[payment_sum]">
+      </div>
+      <div class="form_contacts_container">
+        <p class="modal_title_field">
+          Чек, скриншот перевода
+        </p>
+        <input class="moodal_dn" id="modal_1_download_2" type="file" name="data[payment_check]" onchange="fileSelected(this, '.modal_file')" >
+        <label class="modal_file" for="modal_1_download_2">
+          <img src="/themes/aofa/assets/img/downalade_icon.png" alt="">
+          Загрузить
+        </label>
+      </div>
+    </div>
+  </div>
+

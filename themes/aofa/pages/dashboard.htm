@@ -1,0 +1,48 @@
+title = "Панель управления"
+url = "/dashboard"
+layout = "default"
+is_hidden = 0
+
+[orders]
+
+[orderForm]
+==
+<?php
+function onStart(){
+
+        if(session()->has('auth_key')) {
+            $auth_key = session()->get('auth_key');
+            $existsKey = \Uit\Aofa\Models\Key::where('key', $auth_key)->first();
+            if(!is_null($existsKey)){
+                if(!$existsKey->isActive()) {
+                    return redirect()->to('locked');
+                }
+            }
+        }else{
+            return redirect()->to('login');
+        }
+        
+
+    }
+?>
+==
+<div class="modal_container">
+        <div class="modal_content">
+
+			{% partial 'header' %}
+
+        	<p class="modal_title wow  fadeInUp">
+				Панель управления
+			</p>
+		    {% component 'orders' %}
+			<div class="modal_line wow  fadeInUp"></div>
+		
+			<div class="modal_line" id="order-form"></div>
+			{% component 'orderForm' %}
+		
+		</div>
+		<div class="container_message">
+			
+		</div>
+		{% partial 'footer' %}
+	</div>

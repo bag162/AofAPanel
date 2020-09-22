@@ -1,0 +1,12 @@
+title: 'Api ключи'
+modelClass: Uit\Aofa\Models\Key
+list: $/uit/aofa/models/key/columns.yaml
+recordUrl: 'uit/aofa/keys/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

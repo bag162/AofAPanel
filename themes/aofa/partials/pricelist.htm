@@ -1,0 +1,140 @@
+==
+<div class="modal_prised modal_wrapper">
+        <div class="dm-table">
+            <div class="dm-cell">
+                <div class="modal_content">
+                    <div class="modal_header">
+                        <img src="{{'assets/img/log_modal.png'|theme}}" alt="">
+                        <div class="modal_close_button">
+                            Закрыть
+                        </div>
+                    </div>
+                    <p class="modal_title modal_title_acaunt">
+                        Прайс лист
+                    </p>
+                    <p class="modal_itemeds_title">
+                        Продажа копий
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                               Продажа 1 копии TNManager и 1 копии SMS Service
+                            </p>
+                            <p class="modal_itemed_price">
+                               {{aofa_settings('price_sell')}} руб.<span>в месяц</span> 
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_itemeds_title">
+                        Установка
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Установка 1 копии SMS Service на сервера RUVDS (+ оплата за 1 месяц) 
+                            </p>
+                            <p class="modal_itemed_price">
+                              {{aofa_settings('ruvds_price')}} руб.
+                            </p>
+                        </div>
+                        <div class="modal_panel_item_line"></div>
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Установка 1 копии TNManager на сервера WellServer (+ оплата за 1 месяц) 
+                            </p>
+                            <p class="modal_itemed_price">
+                                {{aofa_settings('wellserver_price')}} руб.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_itemeds_title">
+                        Администрирование
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Администрирование 1-ого сервера TNManager 
+                            </p>
+                            <p class="modal_itemed_price">
+                                 {{aofa_settings('price_tnmanager_admin')}} руб. <span>в неделю</span>
+                            </p>
+                        </div>
+                        <div class="modal_panel_item_line"></div>
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Администрирование 1-ого сервера SMS Service
+                            </p>
+                            <p class="modal_itemed_price">
+                                  {{aofa_settings('price_sms_admin')}} руб. <span>в неделю</span>
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_itemeds_title">
+                        Акаунты
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Покупка 1-ого аккаунта TextNow Canada 
+                            </p>
+                            <p class="modal_itemed_price">
+                                {{aofa_settings('countries.0.price')}} руб.
+                            </p>
+                        </div>
+                        <div class="modal_panel_item_line"></div>
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Покупка 1-ого аккаунта TextNow USA 
+                            </p>
+                            <p class="modal_itemed_price">
+                               {{aofa_settings('countries.1.price')}} руб.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_itemeds_title">
+                        Регистрация
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Регистрация сессии для 1-ого аккаунта
+
+                            </p>
+                            <p class="modal_itemed_price">
+                                {{aofa_settings('session_price')}} руб.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_itemeds_title">
+                        Востановление
+                    </p>
+                    <div class="modal_itemed">
+                        <div class="modal_itemed_block">
+                             <p class="modal_itemed_title">
+                                Восстановление 1-ого аккаунта
+                            </p>
+                            <p class="modal_itemed_price">
+                                {{aofa_settings('restore_price')}} руб.
+                            </p>
+                        </div>
+                    </div>
+                    <p class="modal_type_title">
+                        Реквизиты
+                    </p>
+                    {% for payment in aofa_settings('payments')%}
+                    <p class="modal_requised" style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+">
+                      <img src="{{payment.logo|media}}" style="height: 25px; width: auto; margin-right: 1rem" alt="">  {{payment.name}}:  {{payment.uid}}
+                    </p>
+                    {% endfor %}
+                  
+                    <div class="modal_close_button">
+                        Закрыть
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>

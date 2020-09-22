@@ -1,0 +1,36 @@
+fields:
+    name:
+        label: Название
+        span: auto
+        type: text
+    validation_rules:
+        label: 'Валидация полей'
+        prompt: 'Добавить правило'
+        span: full
+        type: repeater
+        form:
+            fields:
+                field:
+                    label: 'Валидация полей'
+                    span: auto
+                    type: text
+                rule:
+                    label: Правило
+                    span: auto
+                    type: text
+                label:
+                    label: 'Название поле'
+                    span: auto
+                    type: text
+    form:
+        label: Форма
+        size: giant
+        language: twig
+        span: full
+        type: codeeditor
+    result:
+        label: 'Результат в панель управления'
+        size: large
+        language: twig
+        span: full
+        type: codeeditor

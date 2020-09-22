@@ -1,0 +1,11 @@
+name: Заявки
+modelClass: Uit\Aofa\Models\Order
+form: $/uit/aofa/models/order/fields.yaml
+defaultRedirect: uit/aofa/orders
+# create:
+#     redirect: 'uit/aofa/orders/update/:id'
+#     redirectClose: uit/aofa/orders
+update:
+    redirect: uit/aofa/orders
+    redirectClose: uit/aofa/orders
+preview: {  }

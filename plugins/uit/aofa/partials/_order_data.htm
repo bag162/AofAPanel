@@ -1,0 +1,23 @@
+<?php
+
+function keyReplace($key, $model){
+    $vrules = \Uit\Aofa\Models\OrderType::find($model->type_id)->fields;
+    $result = $vrules->where('name', $key)->first();
+    $text =  $result['label'];   
+    return mb_strtoupper(mb_substr($text, 0, 1)) . mb_substr($text, 1);
+}
+
+?>
+
+<div class="control-list">
+    <table class="table data">
+        <tbody>
+            <?php foreach($model->data as $key => $value): ?>
+                <tr>
+                    <td><?=ucfirst(keyReplace($key, $model))?></td>
+                    <td><?=$value?></td>
+                </td>  
+            <?php endforeach ?>
+        </tbody>
+    </table>
+</div>

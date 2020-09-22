@@ -1,0 +1,36 @@
+<div x-data="{currentType: null}"> 
+  <p class="modal_title modal_title_acaunt">
+    Отправить заявку
+  </p>
+  <div class="modal_types wow  fadeInUp ">
+    {% for type in orderTypes %}
+        {% if type.id != 7 %}
+        <input  name="type" id="modal_tyle_{{type.id}}" type="radio" value="{{type.id}}" x-model="currentType">               
+        <label for="modal_tyle_{{type.id}}">
+        {{type.label}}
+        </label>
+        {% endif %}
+    {% endfor %}
+  </div>
+  <div class="modal_line"></div>
+  {% for type in orderTypes %}
+    {% if type.id != 7 %}
+    <template x-if="currentType=={{type.id}}">
+    
+        <div>
+            {% set formClass = 'type-form modal_type_'~type.id~' animated  fadeIn '  %}
+            {% set typeAction = 'on'~type.component %}
+            {{ form_ajax(typeAction, { class: formClass, 'data-request-files':' ', 'data-request-flash':' ', 'data-request-success':'this.reset(); $(".modal_type_footer_summ span").text("0");window.scrollTo(0,document.body.scrollHeight)'}) }}
+
+            <input  type="hidden" name="data[order_type]" value="{{type.id}}" > 
+            <p class="modal_title modal_title_acaunt">{{ type.label }}</p>
+
+            {% component type.component  %}
+            {{form_close()}}
+        </div>
+
+    
+    </template>
+    {% endif %}
+  {% endfor %}
+</div> 

@@ -1,0 +1,29 @@
+{% set formClass = 'type-form modal_type_'~type.id~' animated  fadeIn '  %}
+
+<div x-data="{paymentType:null }">
+{{ form_ajax('onBuyService', { class: formClass, 'data-request-files':' ', 'data-request-flash':' ', 'data-request-success':'this.reset()'}) }}
+        		<p class="wow fadeInUp modal_title animated" style="visibility: visible; animation-name: fadeInUp;">
+        			Выбрать подходящую покупку
+        		</p>
+        		<div class="wow fadeInUp modal_radio animated" style="visibility: visible; animation-name: fadeInUp;">
+        			<input id="byes_1" type="radio" name="byes" checked="">
+        			<label for="byes_1">Купить ПО AofA SMS Service</label>
+        		
+        		</div>
+        		<p class="modal_title wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+        			Ваши контакты
+        		</p>
+        		<div class="form_contacts wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+        			<input type="name" name="data[name]" placeholder="Имя" >
+        			<input type="text" name="data[phone]" placeholder="Telegram" >
+        			<input type="email" name="data[email]" placeholder="Почта" >
+        		</div>
+        		 {% partial '@_payment-methods.htm' %}
+
+                <input type="hidden" name="data[order_type]" value="7">
+        		<button type="submit" class="modal_send_button wow adeInUp animated" style="visibility: visible;">
+        			<img src="/themes/aofa/assets/img/modal_icon1.png" alt="">
+        			Отправить запрос
+        		</button>
+{{ form_close() }}
+</div>

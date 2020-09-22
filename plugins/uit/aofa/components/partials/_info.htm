@@ -1,0 +1,127 @@
+{% if order.type_id == 1 %}
+
+
+{% if position and  order.status_id == 2 %}
+<div class="modal_panel_item_wrapper">
+							<div class="modal_panel_item_wrapper_title">
+								В очереди номер
+							</div>	
+							<div class="modal_panel_item_wrapper_desc">
+								{{position}}
+							</div>
+</div>
+{% endif %}
+
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">Количество аккаунтов:</div>
+    <div class="modal_panel_item_wrapper_desc">
+        {{order.data.account_count}}
+    </div>
+</div>
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">Страна</div>
+    <div class="modal_panel_item_wrapper_desc">{{order.data.country}}</div>
+</div>
+<div class="modal_panel_item_total">
+    Итого: <span> {{order.total}} рублей</span>
+</div>
+
+{% endif %} {% if order.type_id == 2 %}
+
+{% if position and  order.status_id == 2 %}
+<div class="modal_panel_item_wrapper">
+							<div class="modal_panel_item_wrapper_title">
+								В очереди номер
+							</div>	
+							<div class="modal_panel_item_wrapper_desc">
+								{{position}}
+							</div>
+</div>
+{% endif %}
+
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">
+        Количество восстанавливаемых аккаунтов:
+    </div>
+    <div class="modal_panel_item_wrapper_desc">
+        {{order.data.account_count}}
+    </div>
+</div>
+<div class="modal_panel_item_total">
+    Итого: <span> {{order.total}} рублей</span>
+</div>
+
+{% endif %} {% if order.type_id == 3 %}
+
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">Срок продления</div>
+    <div class="modal_panel_item_wrapper_desc">
+        {{order.data.month_count}} месяцев
+    </div>
+</div>
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">Количество лицензий</div>
+    <div class="modal_panel_item_wrapper_desc">
+        {{order.data.license_count}}
+    </div>
+</div>
+<div class="modal_panel_item_total">
+    Итого: <span> {{order.total}} рублей</span>
+</div>
+
+{% endif %} {% if order.type_id == 4 %}
+
+<div class="modal_panel_item_wrapper">
+    <div class="modal_panel_item_wrapper_title">Количество аккаунтов:</div>
+    <div class="modal_panel_item_wrapper_desc">
+        {{order.data.account_count}}
+    </div>
+</div>
+<div class="modal_panel_item_total">
+    Итого: <span> {{order.total}} рублей</span>
+</div>
+
+{% endif %} {% if order.type_id == 5 %}
+
+<p class="modal_panel_item_admincomment
+						modal_admincomment_left">
+                            {% if order.note %}
+							*Администратор: {{order.note}}
+                            {% endif %}
+						</p>
+						<div class="modal_panel_item_total" style="min-height: 50px;">
+							Итого:  <span> {{order.data.payment_sum}} рублей</span>
+						</div>
+
+{% endif %} {% if order.type_id == 6 %}
+
+
+    <div class="modal_panel_end_first">
+        <div class="modal_panel_end_first_item">
+            <h4>Тип администрируемого ПО</h4>
+            
+            <p>{% if order.data.admin_server == 'tnmanager' %} TNManager {% else %} SMS Service {% endif %}</p>
+        </div>
+        <div class="modal_panel_end_first_item">
+            <h4>Срок администрирования</h4>
+            <p>{{order.data.week_count}} недель</p>
+        </div>
+    </div>
+    <div class="modal_panel_end_second">
+        <div class="modal_panel_end_second_item">
+            <h4>Кол-во серверов</h4>
+            <p>{{order.data.server_count}}</p>
+        </div>
+        <div class="modal_panel_end_second_item">
+            <div class="modal_end_total">Итого: <span>{{order.total}} рублей</span></div>
+        </div>
+    </div>
+    {% if order.note %}
+    <div class="modal_vertical_line"></div>
+    <p class="modal_coment_autore">
+        *Администратор: {{order.note}}
+    </p>
+    {% endif %}
+
+
+{% endif %}

@@ -1,0 +1,13 @@
+scopes:
+    status_id:
+        label: Статус
+        type: group
+        conditions: status_id in (:filtered)
+        options: getStatusIdOptions
+        modelClass: Uit\Aofa\Models\Order
+    type_id:
+        label: Тип заявки
+        type: group
+        conditions: type_id in (:filtered)
+        options: getTypeIdOptions
+        modelClass: Uit\Aofa\Models\Order

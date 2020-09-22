@@ -1,0 +1,11 @@
+name: 'Api ключ'
+modelClass: Uit\Aofa\Models\Key
+form: $/uit/aofa/models/key/fields.yaml
+defaultRedirect: uit/aofa/keys
+create:
+    redirect: 'uit/aofa/keys/update/:id'
+    redirectClose: uit/aofa/keys
+update:
+    redirect: uit/aofa/keys
+    redirectClose: uit/aofa/keys
+preview: {  }

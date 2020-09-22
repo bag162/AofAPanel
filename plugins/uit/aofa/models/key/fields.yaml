@@ -1,0 +1,27 @@
+fields:
+    status:
+        label: Статус
+        options:
+            - Заблокирован
+            - Активный
+        showSearch: true
+        span: auto
+        type: dropdown
+    key:
+        label: 'Api ключь'
+        span: auto
+        type: text
+    balance:
+        label: Баланс
+        span: auto
+        type: number
+    tn_manager_end:
+        label: TNManager
+        mode: datetime
+        span: left
+        type: datepicker
+    sms_service_end:
+        label: 'ПО SMS Service'
+        mode: datetime
+        span: auto
+        type: datepicker

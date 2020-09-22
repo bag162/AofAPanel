@@ -1,0 +1,11 @@
+name: 'Тип заявок'
+modelClass: Uit\Aofa\Models\OrderType
+form: $/uit/aofa/models/ordertype/fields.yaml
+defaultRedirect: uit/aofa/ordertypes
+create:
+    redirect: 'uit/aofa/ordertypes/update/:id'
+    redirectClose: uit/aofa/ordertypes
+update:
+    redirect: uit/aofa/ordertypes
+    redirectClose: uit/aofa/ordertypes
+preview: {  }

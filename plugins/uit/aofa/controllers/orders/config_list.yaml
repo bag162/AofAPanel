@@ -1,0 +1,14 @@
+title: Заявки
+modelClass: Uit\Aofa\Models\Order
+list: $/uit/aofa/models/order/columns.yaml
+recordUrl: 'uit/aofa/orders/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+defaultSort: id,asc
+filter: config_filter.yaml
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

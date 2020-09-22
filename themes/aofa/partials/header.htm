@@ -1,0 +1,15 @@
+==
+<div class="wow  fadeInDown modal_header">
+        		<img src="{{'assets/img/log_modal.png'|theme}}" alt="">
+        		<div class="modal_balance">
+        			<p class="modal_balance_title">
+        				Баланс: <span>{{api_key.balance}} рублей</span>
+        			</p>
+        			<p class="modal_balance_payment">
+        				ПО TNManager <span>{% if api_key.tn_manager_end.isPast() %} срок истек {% else %}оплачено до {{api_key.tn_manager_end|date('d.m.Y')}}{% endif %}</span>
+        			</p>
+        			<p class="modal_balance_payment">
+        				ПО SMS Service <span>{% if api_key.sms_service_end.isPast() %} срок истек {% else %}оплачено до {{api_key.sms_service_end|date('d.m.Y')}}{% endif %}</span>
+        			</p>
+        		</div>
+	</div>

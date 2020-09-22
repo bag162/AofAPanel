@@ -1,0 +1,36 @@
+==
+<div
+    class="modal_footer wow fadeInUp animated"
+    style="visibility: visible; animation-name: fadeInUp"
+>
+    <a href="{{aofa_settings('social_vk')}}" class="modal_footer_item" target="_blank">
+        <img src="/themes/aofa/assets/img/icon_vk.png" alt="" />
+    </a>
+    <a href="{{aofa_settings('social_telegram')}}" class="modal_footer_item" target="_blank">
+        <img
+            class="modal_footer_img"
+            src="/themes/aofa/assets/img/icon_teleg.png"
+            alt=""
+        />
+    </a>
+    <a href="mailto:{{aofa_settings('email')}}" class="modal_footer_item modal_footer_item_pad" target="_blank">
+        <img
+            class="modal_footer_img"
+            src="/themes/aofa/assets/img/mail.png"
+            alt=""
+        />
+       {{aofa_settings('email')}}
+    </a>
+    {# <a href="#" class="modal_footer_item modal_footer_item_pad">
+        <img
+            class="modal_footer_img"
+            src="/themes/aofa/assets/img/mail.png"
+            alt=""
+        />
+        {{aofa_settings('phone')}}
+    </a> #}
+    <a href="{{aofa_settings('link_instruction')}}" target="_blank" class="modal_footer_link"> Инструкции пользования </a>
+    <a id="modal_footer" class="modal_footer_link modal_footer_link_price">
+        Прайс лист
+    </a>
+</div>

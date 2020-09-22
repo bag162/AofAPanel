@@ -1,0 +1,10 @@
+name: OrderStatuses
+form: $/uit/aofa/models/orderstatus/fields.yaml
+modelClass: Uit\Aofa\Models\OrderStatus
+defaultRedirect: uit/aofa/orderstatuses
+create:
+    redirect: 'uit/aofa/orderstatuses/update/:id'
+    redirectClose: uit/aofa/orderstatuses
+update:
+    redirect: uit/aofa/orderstatuses
+    redirectClose: uit/aofa/orderstatuses

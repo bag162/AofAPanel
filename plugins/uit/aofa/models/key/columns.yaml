@@ -1,0 +1,17 @@
+columns:
+    id:
+        label: id
+        type: number
+    key:
+        label: key
+        type: text
+    balance:
+        label: balance
+        type: number
+    statusName:
+        label: Статус
+        type: text
+    services:
+        label: 'Срок действия'
+        type: partial
+        path: $/uit/aofa/partials/_services.htm

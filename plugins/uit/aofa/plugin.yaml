@@ -1,0 +1,28 @@
+plugin:
+    name: 'uit.aofa::lang.plugin.name'
+    description: 'uit.aofa::lang.plugin.description'
+    author: Uit
+    icon: oc-icon-bar-chart-o
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'Работы с API ключами'
+        url: uit/aofa/keys
+        icon: icon-key
+    main-menu-item2:
+        label: Заявки
+        url: uit/aofa/orders
+        icon: icon-comments
+        sideMenu:
+            side-menu-item:
+                label: Заявки
+                url: uit/aofa/orders
+                icon: icon-comments 
+    main-data-menu:
+        label: 'Работа с данными'
+        url: 'system/settings/update/uit/aofa/settings'      
+        icon: icon-cogs      
+permissions:
+    uit.aofa.developer:
+        tab: 'Только разработчик'
+        label: 'Только разработчик'

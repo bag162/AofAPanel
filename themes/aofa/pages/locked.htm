@@ -1,0 +1,42 @@
+title = "ApiKey заблокирован"
+url = "/locked"
+layout = "default"
+is_hidden = 0
+==
+<div class="modal_container">
+        <div class="modal_content">
+        	<div class="wow  fadeInDown modal_header ">
+        		<img src="{{'assets/img/log_modal.png'|theme}}" alt="">
+        		<a href="{{'home'|page}}" class="modal_button_panel">
+        			Перейти в панель оплаты
+        		</a>
+        	</div>
+        	<form action="" class="modal_api wow  fadeInUp">
+        		<p class="modal_title modal_big_title">
+            		APIKey Заблокирован
+            	</p>
+            	<div class="modal_api_conteiner">
+            		<button class="modal_big_submit" type="submit">Обратиться к администратору</button>
+            	</div>
+        	</form>
+		</div>
+		<div class="container_message">
+			<div id="message_modal_success" class="message_modal message_success">
+				<div class="message_modal_container">
+					<p class="message_modal_title">
+						Ваш запрос успешно отправлен
+					</p>
+					<div id="message_cross_success" class=" message_modal_cross"></div>
+				</div>
+			</div>
+			<!-- <div id="message_modal_wrong" class="message_modal message_wrong">
+				<div class="message_modal_container">
+					<p class="message_modal_title">
+						Возникла ошибка
+					</p>
+					<div id="message_cross_wrong" class="message_modal_cross"></div>
+				</div>
+			</div> -->
+		</div>
+		{% partial 'footer' %}
+	</div>

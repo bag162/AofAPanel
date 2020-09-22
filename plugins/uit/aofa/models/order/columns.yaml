@@ -1,0 +1,25 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: false
+    type_name:
+        label: 'Тип заявки'
+        type: partial
+        path: $/uit/aofa/partials/_type_name.htm
+        sortable: false
+        searchable: false
+    created_at:
+        label: 'Дата создания'
+        type: datetime
+        searchable: false
+    updated_at:
+        label: 'Дата обновления'
+        type: datetime
+        searchable: false
+    status_name:
+        label: Статус
+        type: partial
+        path: $/uit/aofa/partials/_status_name.htm
+        sortable: false
+        searchable: false

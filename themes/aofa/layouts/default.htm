@@ -1,0 +1,42 @@
+description = "Default layout"
+
+[account]
+==
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>AofA Group - {{ this.page.title }}</title>
+        <meta name="description" content="{{ this.page.meta_description }}">
+        <meta name="title" content="{{ this.page.meta_title }}">
+        <meta name="author" content="AOFA">
+       
+
+        <link rel="apple-touch-icon" sizes="180x180" href="{{'assets/apple-touch-icon.png'|theme}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{'assets/favicon-32x32.png'|theme}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{'assets/favicon-16x16.png'|theme}}">
+        <link rel="manifest" href="{{'assets/site.webmanifest'|theme}}">   
+
+        <link rel="stylesheet" href="{{'assets/css/main.css'|theme}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+          <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
+        <script src="{{'assets/js/main.js'|theme}}"></script>
+        <script>
+          new WOW().init();
+        </script>
+
+        {% styles %}
+    </head>
+    <body>
+
+        {% page %}
+        <!-- Scripts -->
+        {% partial 'pricelist' %}
+ 
+        {% framework extras %}
+        {% scripts %}
+
+    </body>
+</html>

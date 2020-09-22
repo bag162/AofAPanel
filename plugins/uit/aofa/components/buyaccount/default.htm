@@ -1,0 +1,44 @@
+{% set countries = aofa_settings('countries') %}
+
+
+<div x-data="{accountCount:null, countryPrice:{{countries[0].price}},paymentMethod:'pay',paymentType:null }">
+  <p class="modal_type_title">Выбрать страну</p>
+  <div class="modal_type_fields">
+    {% for country in countries %}
+    <input {% if loop.first %}checked{% endif%} id="modal_1_country_{{loop.index}}" name="data[country]" type="radio" value="{{country.name}}" x-on:change="countryPrice = {{country.price}}"  >
+    <label for="modal_1_country_{{loop.index}}">{{country.name}} </label>
+    <label for="modal_1_country_{{loop.index}}">{{country.price}} руб./акк. </label>
+    {% endfor %}
+  </div>
+  <p class="modal_type_title">
+    Кол-во аккаунтов
+  </p>
+  <input class="modal_solo_field" type="text"  placeholder="0 аккаунтов" name="data[account_count]" data-number x-model.number="accountCount"> 
+  
+  
+  {% partial '@_payment-fields' %}
+
+  <p class="modal_type_title">
+    Сообщение
+  </p>
+  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]"></textarea>
+  <div class="modal_line"></div>
+
+  <div class="modal_type_footer">
+    <div class="modal_type_footer_summ">
+      <span x-text="Number(accountCount)*Number(countryPrice)||0">
+      </span> рублей
+     
+    </div>
+    <div class="modal_type_footer_line">
+    </div>
+    <button class="modal_type_footer_button">
+      <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
+      Отправить запрос
+    </button>
+  </div>
+
+  <div class="modal_line"></div>
+
+</div>
+

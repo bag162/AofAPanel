@@ -1,0 +1,56 @@
+{% set restore_price =  aofa_settings('restore_price') %}
+<div  x-data="{totalSum: null, accountCount: null, recoveryPrice:{{restore_price}}, paymentMethod:'pay',paymentType:null }" x-init="setInterval(() => {
+                                                                                                                                  accountCount = Number($refs.recovery_line_count.textContent);
+                                                                                                                                  }, 500); ">
+  <div class="modal_type_download_titles">
+    <p>
+      Цена аккаунта
+    </p>
+    <p>
+      Загрузить аккаунты
+    </p>
+  </div>
+  <div class="modal_type_download_blocks">
+    <div class="modal_type_download_block">
+      {{aofa_settings('restore_price')}} руб./акк.
+    </div>
+    <input class="moodal_dn" id="modal_2_download_1" type="file" onchange="$('[data-request=onFileLineCount]').trigger('click')"  name="data[recover_file]">
+    <button data-request="onFileLineCount" data-request-files type="submit">
+    </button>
+    <label class="modal_type_download_block_d" for="modal_2_download_1">
+      <img src="/themes/aofa/assets/img/downalade_icon.png" alt="">
+      Загрузить
+    </label>
+    <div class="modal_type_download_block">
+      кол-во: &nbsp;
+      <span id="recovery_line_count" x-ref="recovery_line_count">0
+      </span>&nbsp; акк.
+    </div>
+  </div>
+
+ {% partial '@_payment-fields' %}
+  
+  <p class="modal_type_title">
+    Сообщение
+  </p>
+  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]">
+  </textarea>
+  <div class="modal_line">
+  </div>
+  <div class="modal_type_footer">
+    <div class="modal_type_footer_summ">
+      <span x-text="Number(accountCount)*Number(recoveryPrice)||0">
+      </span> рублей
+     
+    </div>
+    <div class="modal_type_footer_line">
+    </div>
+    <button class="modal_type_footer_button">
+      <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
+      Отправить запрос
+    </button>
+    <input type="hidden" name="data[account_count]" x-model="accountCount">   
+  </div>
+  <div class="modal_line">
+  </div>
+</div>

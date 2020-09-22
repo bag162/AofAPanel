@@ -1,0 +1,17 @@
+{% if type == 'success' %}
+<div id="message_modal_success" class="message_modal message_success wow fadeInUp animated" style="opacity:0; display: block">
+    <div class="message_modal_container">
+        <p class="message_modal_title">{{message}}</p>
+        <div id="message_cross_success" class="message_modal_cross"></div>
+    </div>
+</div>
+{% else %}
+<div id="message_modal_wrong" class="message_modal message_wrong wow fadeInUp animated" style="opacity:0; display: block">
+				<div class="message_modal_container">
+					<p class="message_modal_title">
+						{{message}}
+					</p>
+					<div id="message_cross_wrong" class="message_modal_cross"></div>
+				</div>
+			</div> 
+{% endif %}

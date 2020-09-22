@@ -1,0 +1,49 @@
+<div class="modal_panel_items">
+   {% for order in orders %}
+   {% set position = order.getPosition() %}
+   <div
+      class="modal_panel_item modal_panel_item_unactive wow fadeInUp"
+      style="visibility: visible; animation-name: fadeInUp"
+      >
+      <div class="modal_panel_item_head">
+         <p class="modal_panel_item_title">{{order.type.label}}</p>
+         <p class="modal_panel_item_date">Дата заявки: {{order.created_at|date('d.m.Y')}}</p>
+         {% if position == 1 and order.status_id == 2 %}
+         <div class="modal_panel_item_state" style="background: orange ">Исполняется</div>
+         {% else %}
+         <div class="modal_panel_item_state" style="background: {{order.status.color}} ">{{order.status.name}}</div>
+         {% endif %}
+      </div>
+      <div class="modal_panel_item_line"></div>
+      <div class="modal_panel_item_middle">
+         {% partial '@_info' order=order position=position %}
+      </div>
+      
+      {% if order.files  or order.note   %}
+      <div class="modal_panel_item_line"></div>
+      <div class="modal_panel_item_footer">
+         {% if order.files %}
+         {% for file in order.files %}
+         <a
+            class="modal_panel_item_loading"
+            href="{{file.path}}"
+            download=""
+            >Скачать файл</a
+            >
+         {% endfor %}
+         {% endif %}
+         {% if order.note and order.type_id != 6 and order.note and order.type_id != 5   %}
+         <p class="modal_panel_item_admincomment">
+            *Администратор: {{order.note}}
+         </p>
+         {% endif %}
+      </div>
+      {% endif %}
+
+
+   </div>
+   {% else %}
+   <p>Список заявок пуст</p>
+   {% endfor %}
+   {{ orders.render()|raw }}
+</div>
