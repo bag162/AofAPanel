@@ -1,12 +1,14 @@
 description = "Default layout"
 
 [account]
+
+[faqList]
 ==
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>AofA Group - {{ this.page.title }}</title>
+        <title>AofA SMS Service - {{ this.page.title }}</title>
         <meta name="description" content="{{ this.page.meta_description }}">
         <meta name="title" content="{{ this.page.meta_title }}">
         <meta name="author" content="AOFA">
@@ -19,7 +21,7 @@ description = "Default layout"
 
         <link rel="stylesheet" href="{{'assets/css/main.css'|theme}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-          <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/wow/0.1.12/wow.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
         <script src="{{'assets/js/main.js'|theme}}"></script>
@@ -34,7 +36,7 @@ description = "Default layout"
         {% page %}
         <!-- Scripts -->
         {% partial 'pricelist' %}
- 
+         {% partial 'faqlist' %}
         {% framework extras %}
         {% scripts %}
 

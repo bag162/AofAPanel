@@ -208,6 +208,108 @@ Route::post('checkrecovery', function () {
 
 
 
+Route::get('checkregsession', function () {
+    if (is_null(get('api_key')) || get('api_key') != config('app.api_key')) {
+        return response('STATUS:BAD', 403)->header(
+            'Content-Type',
+            'text/plain'
+        );
+    }
+
+    $order = Order::where('type_id', ORDER_TYPES['REGISTER_SESSION'])
+        ->where('status_id', ORDER_STATUS['PAYED'])
+        ->orderBy('created_at', 'asc')
+        ->first();
+
+    if (is_null($order) || !$order->data['recover_file']) {
+        return response('STATUS:BAD', 403)->header(
+            'Content-Type',
+            'text/plain'
+        );
+    } else {
+        $file = public_path(parse_url($order->data['recover_file'])['path']);
+
+        $accountLines = '';
+        $handle = fopen($file, 'r');
+        while (!feof($handle)) {
+            $line = fgets($handle);
+            $accountLines .= $line;
+        }
+
+        fclose($handle);
+
+        return response("STATUS:OK\n" . $accountLines, 403)->header(
+            'Content-Type',
+            'text/plain'
+        );
+    }
+});
+
+
+Route::post('checkregsession', function () {
+    if (is_null(get('api_key')) || get('api_key') != config('app.api_key')) {
+        return response('STATUS:BAD', 403)->header(
+            'Content-Type',
+            'text/plain'
+        );
+    }
+
+    $form = Input::all();
+
+    $file = $form['accounts']->path();
+
+    $linecount = 0;
+    $handle = fopen($file, 'r');
+    while (!feof($handle)) {
+        $line = fgets($handle);
+        $linecount++;
+    }
+    fclose($handle);
+
+    $order = Order::where('type_id', ORDER_TYPES['REGISTER_SESSION'])
+        ->where('status_id', ORDER_STATUS['PAYED'])
+        ->orderBy('created_at', 'asc')
+        ->first();
+
+    if (is_null($order) || !$order->data['recover_file']) {
+        return response('STATUS:BAD', 403)->header(
+            'Content-Type',
+            'text/plain'
+        );
+    }
+
+    $order->status_id = ORDER_STATUS['INPROGRESS'];
+    $order->save();
+
+    $file = public_path(parse_url($order->data['recover_file'])['path']);
+
+    $needAccountCount = 0;
+    $handle = fopen($file, 'r');
+    while (!feof($handle)) {
+        $line = fgets($handle);
+        $needAccountCount ++;
+    }
+
+    fclose($handle);
+
+    $file = (new File())->fromPost($form['accounts']);
+    $file->save();
+    $order->files()->add($file);
+    $order->status_id = ORDER_STATUS['COMPLETED']; //Успешно выполнен
+    $order->save();
+    return response('STATUS:SUCCES', 200)->header(
+        'Content-Type',
+        'text/plain'
+    );
+
+    $order->status_id = ORDER_STATUS['PAYED'];
+    $order->save();
+
+    return response('STATUS:BAD', 403)->header('Content-Type', 'text/plain');
+});
+
+
+
 
 
 Route::get('checkregistration', function () {

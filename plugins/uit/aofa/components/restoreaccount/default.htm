@@ -1,4 +1,5 @@
 {% set restore_price =  aofa_settings('restore_price') %}
+{% set min_restore_accounts =  aofa_settings('min_restore_accounts') %}
 <div  x-data="{totalSum: null, accountCount: null, recoveryPrice:{{restore_price}}, paymentMethod:'pay',paymentType:null }" x-init="setInterval(() => {
                                                                                                                                   accountCount = Number($refs.recovery_line_count.textContent);
                                                                                                                                   }, 500); ">
@@ -6,8 +7,9 @@
     <p>
       Цена аккаунта
     </p>
-    <p>
+    <p style="text-align: left">
       Загрузить аккаунты
+      <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">минимальное кол-во аккаунтов для восстановление : {{min_restore_accounts}}</small>
     </p>
   </div>
   <div class="modal_type_download_blocks">

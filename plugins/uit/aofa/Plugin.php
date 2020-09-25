@@ -18,6 +18,7 @@ class Plugin extends PluginBase
             'Uit\Aofa\Components\Account' => 'account',
             'Uit\Aofa\Components\OrderForm' => 'orderForm',
             'Uit\Aofa\Components\Orders' => 'orders',
+            'Uit\Aofa\Components\FaqList' => 'faqList',
         ];
 
         return array_merge($components, $typeComponents);

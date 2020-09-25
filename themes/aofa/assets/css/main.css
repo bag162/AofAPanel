@@ -464,7 +464,7 @@ p.modal_big_title {
 	font-size: 16px;
 	border: 1px solid #DEDEDE;
 	border-radius: 100px;
-	padding: 15px 25px;
+	padding: 15px 23px;
 }
 
 .container_modal_requisites {
@@ -576,14 +576,7 @@ p.modal_big_title {
 	margin-bottom: 25px;
 }
 
-::-webkit-datetime-edit {  }
-::-webkit-datetime-edit-fields-wrapper {  }
-::-webkit-datetime-edit-text { color: #7e7e7e; }
-::-webkit-datetime-edit-month-field { color: #7e7e7e; }
-::-webkit-datetime-edit-day-field { color: #7e7e7e; }
-::-webkit-datetime-edit-year-field { color: #7e7e7e; }
-::-webkit-inner-spin-button { display: none; }
-::-webkit-calendar-picker-indicator { display: none; }
+
 
 .modal_file {
 	cursor: pointer;
@@ -1792,7 +1785,7 @@ p.modal_title_acaunt {
 	color: #00A650;
 }
 
-.modal_prised .modal_content {
+.modal_prised .modal_content, .modal_faq .modal_content {
 	margin-bottom: 50px;
 	padding-bottom: 50px;
 }
@@ -1801,7 +1794,7 @@ p.modal_title_acaunt {
 	cursor: pointer;
 }
 
-.modal_prised .modal_type_title {
+.modal_prised .modal_type_title, .modal_faq .modal_type_title {
 	margin-top: 50px;
 	margin-left: 0;
 	text-align: center;
@@ -1880,4 +1873,37 @@ p.modal_title_acaunt {
 
   .flash-message{
 	font-family: MazzardH-Light !important;
+  }
+
+
+  .faq__question {
+	font-size: 18px;
+	font-family: MazzardH-Bold;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+  }
+  .faq__question svg {
+	width: 18px;
+	height: auto;
+  }
+  .faq__answer {
+	font-size: 16px;
+	font-family: MazzardH-Light;
+	padding: 1rem 0 0;
+	display: none;
+  }
+  .faq-item {
+	margin-bottom: 1rem;
+	text-align: left;
+	margin: 0 50px 1rem;
+	border: 1px solid #eee;
+	padding: 1rem;
+	border-radius: 1rem;
+  }
+  .faq-item.opened svg {
+	transform: rotate(180deg);
+  }
+  .faq-item.opened .faq__answer {
+	display: block;
   }

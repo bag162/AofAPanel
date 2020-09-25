@@ -174,6 +174,11 @@ $(document).ready(function () {
      $(".modal_footer_link_price").click(function () {
     	$(".modal_prised").css('display', 'block')
      		.animate({opacity: 1}, 350);
+	 });
+	 
+	 $(".modal_footer_link_faq").click(function () {
+    	$(".modal_faq").css('display', 'block')
+     		.animate({opacity: 1}, 350);
      });
 });
 

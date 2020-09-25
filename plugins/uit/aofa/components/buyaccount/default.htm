@@ -1,4 +1,5 @@
 {% set countries = aofa_settings('countries') %}
+{% set min_buy_accounts = aofa_settings('min_buy_accounts') %}
 
 
 <div x-data="{accountCount:null, countryPrice:{{countries[0].price}},paymentMethod:'pay',paymentType:null }">
@@ -11,10 +12,10 @@
     {% endfor %}
   </div>
   <p class="modal_type_title">
-    Кол-во аккаунтов
+    Кол-во аккаунтов <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">минимальное кол-во аккаунтов для покупки: {{min_buy_accounts}}</small>
   </p>
   <input class="modal_solo_field" type="text"  placeholder="0 аккаунтов" name="data[account_count]" data-number x-model.number="accountCount"> 
-  
+ 
   
   {% partial '@_payment-fields' %}
 

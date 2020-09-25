@@ -1,4 +1,7 @@
 <?php
+use Uit\Aofa\Models\Settings;
+$settings = Settings::instance();
+
 return [
     'payment_types' => [
         'balance' => 'С баланса',
@@ -24,7 +27,7 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric',
+                    'rule' => 'required|numeric|min:'.$settings->get('min_buy_accounts'),
                     'label' => 'кол-во аккаунтов',
                 ],
                 [
@@ -77,7 +80,7 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric',
+                    'rule' => 'required|numeric|min:'.$settings->get('min_restore_accounts'),
                     'label' => 'кол-во аккаунтов',
                 ],
                 [
@@ -176,7 +179,7 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric',
+                    'rule' => 'required|numeric|min:'.$settings->get('min_regsession_accounts'),
                     'label' => 'кол-во аккаунтов',
                 ],
                 [

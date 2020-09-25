@@ -1,0 +1,11 @@
+name: Faqs
+modelClass: Uit\Aofa\Models\Faq
+form: $/uit/aofa/models/faq/fields.yaml
+defaultRedirect: uit/aofa/faqs
+create:
+    redirect: 'uit/aofa/faqs/update/:id'
+    redirectClose: uit/aofa/faqs
+update:
+    redirect: uit/aofa/faqs
+    redirectClose: uit/aofa/faqs
+preview: {  }

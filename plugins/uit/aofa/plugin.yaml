@@ -17,11 +17,15 @@ navigation:
             side-menu-item:
                 label: Заявки
                 url: uit/aofa/orders
-                icon: icon-comments 
+                icon: icon-comments
     main-data-menu:
         label: 'Работа с данными'
-        url: 'system/settings/update/uit/aofa/settings'      
-        icon: icon-cogs      
+        url: system/settings/update/uit/aofa/settings
+        icon: icon-cogs
+    main-menu-item3:
+        label: FAQ
+        url: uit/aofa/faqs
+        icon: icon-question-circle
 permissions:
     uit.aofa.developer:
         tab: 'Только разработчик'

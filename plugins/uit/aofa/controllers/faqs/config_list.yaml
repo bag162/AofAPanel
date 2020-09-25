@@ -1,0 +1,12 @@
+title: Вопросы
+modelClass: Uit\Aofa\Models\Faq
+list: $/uit/aofa/models/faq/columns.yaml
+recordUrl: 'uit/aofa/faqs/update/:id'
+noRecordsMessage: 'backend::lang.list.no_records'
+recordsPerPage: 20
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

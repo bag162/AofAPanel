@@ -93,3 +93,18 @@ tabs:
             span: auto
             type: text
             tab: Контакты
+        price_sell:
+            label: 'Продажа 1 копии TNManager и 1 копии SMS Service'
+            span: auto
+            type: number
+            tab: 'Другие услуги'
+        wellserver_price:
+            label: 'Установка 1 копии TNManager на сервера WellServer (+ оплата за 1 месяц)'
+            span: auto
+            type: number
+            tab: 'Другие услуги'
+        ruvds_price:
+            label: 'Установка 1 копии SMS Service на сервера RUVDS (+ оплата за 1 месяц)'
+            span: auto
+            type: number
+            tab: 'Другие услуги'

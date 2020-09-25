@@ -18,7 +18,7 @@ return [
 
     'debug' => true,
 
-    'api_key' => 'sdfgdsadfghfdsd',
+    'api_key' => 'NV6Q3hMvcKSW17PXhtbwW19BuCRgGcqAZJ6o2Wwa',
 
     /*
     |--------------------------------------------------------------------------
