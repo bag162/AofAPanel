@@ -8,17 +8,17 @@ is_hidden = 0
         	<div class="wow fadeInDown modal_header">
         		<img src="{{'assets/img/log_modal.png'|theme}}" alt="">
         		<a href="{{'home'|page}}" class="modal_button_panel">
-        			Перейти в панель оплаты
+        			{{'Перейти в панель оплаты'|_}}
         		</a>
         	</div>
   
 			{{ form_ajax('onLogin', { class: 'wow  fadeInDown modal_api'}) }}
         		<p class="modal_title modal_big_title">
-            		Введите AofA ApiKey
+            		{{'Введите AofA ApiKey'|_}}
             	</p>
             	<div class="modal_api_conteiner">
             		<input  type="text" name="key" placeholder="_ _ _ _ _ _ _ _ _ _">
-            		<button type="submit">Войти</button>
+            		<button type="submit">{{'Войти'|_}}</button>
             	</div>
         	{{ form_close() }}
 		</div>

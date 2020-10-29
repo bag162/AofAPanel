@@ -11,6 +11,8 @@ use ValidationException;
 use System\Models\File;
 use Config;
 use ApplicationException;
+use Lang;
+use RainLab\Translate\Models\Message;
 
 class RegisterSession extends ComponentBase
 {
@@ -31,6 +33,18 @@ class RegisterSession extends ComponentBase
 
     public function onRegisterSession()
     {
+        if(session()->has('auth_key')) {
+            $auth_key = session()->get('auth_key');
+            $existsKey = \Uit\Aofa\Models\Key::where('key', $auth_key)->first();
+            if(!is_null($existsKey)){
+                if(!$existsKey->isActive()) {
+                    return redirect()->to('locked');
+                }
+            }
+        }else{
+            return redirect()->to('login');
+        }
+
         $data = Input::all()['data'];
 
         $rules = [];
@@ -47,7 +61,7 @@ class RegisterSession extends ComponentBase
                 }
 
                 if ($field['label'] && !empty($field['label'])) {
-                    $attributes[$field['name']] = $field['label'];
+                    $attributes[$field['name']] = Message::trans( $field['label'], [], null);                
                 }
             }
         }
@@ -81,7 +95,7 @@ class RegisterSession extends ComponentBase
         $total = $data['account_count']*$session_price;
 
         if($data['payment_type'] == 'balance'){
-            if($this->getBalance() < $total) throw new ApplicationException('Пожалуйста пополните баланс!');
+            if($this->getBalance() < $total) throw new ApplicationException(Lang::get('uit.aofa::lang.message.balance_enough'));
 
             (new Key)->balanceMinus($this->getKey(), $total);
             $order->status_id = 2;
@@ -102,7 +116,7 @@ class RegisterSession extends ComponentBase
         return [
             '.container_message' => $this->renderPartial('@_message', [
                 'type' => 'success',
-                'message' => 'Ваш запрос успешно отправлен',
+                'message' => Lang::get('uit.aofa::lang.message.request_success'),
             ]),
         ];
     }

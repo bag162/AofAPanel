@@ -1,55 +1,69 @@
 {% set session_price =  aofa_settings('session_price') %}
+{% set for_new_account =  aofa_settings('for_new_account') %}
 {% set min_regsession_accounts =  aofa_settings('min_regsession_accounts') %}
-<div  x-data="{totalSum: null, accountCount: null, sessionPrice:{{session_price}}, paymentMethod:'pay',paymentType:null }" x-init="setInterval(() => {
+<div  x-data="{totalSum: null, accountCount: null, isForNewAccounts:null, forNewAccounts:0, sessionPrice:{{session_price}}, paymentMethod:'pay',paymentType:null }" x-init="setInterval(() => {
                                                                                                                                   accountCount = Number($refs.recovery_line_count.textContent);
                                                                                                                                   }, 500); ">
   <div class="modal_type_download_titles">
     <p>
-      Цена аккаунта
+      {{'Цена аккаунта'|_}}
     </p>
     <p style="text-align: left">
-      Загрузить аккаунты
-       <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">минимальное кол-во аккаунтов для восстановление : {{min_regsession_accounts}}</small>
+      {{'Загрузить аккаунты'|_}}
+       <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">{{'минимальное кол-во аккаунтов для регистрации сессий'|_}}: {{min_regsession_accounts}}</small>
     </p>
   </div>
   <div class="modal_type_download_blocks">
     <div class="modal_type_download_block">
-      {{aofa_settings('session_price')}} руб./акк.
+      {{aofa_settings('session_price')}} {{'руб./акк.'|_}}
     </div>
     <input class="moodal_dn" id="modal_2_download_1" type="file" onchange="$('[data-request=onFileLineCount]').trigger('click')"  name="data[recover_file]">
     <button data-request="onFileLineCount" data-request-files type="submit">
     </button>
     <label class="modal_type_download_block_d" for="modal_2_download_1">
       <img src="/themes/aofa/assets/img/downalade_icon.png" alt="">
-      Загрузить
+      {{'Загрузить'|_}}
     </label>
     <div class="modal_type_download_block">
-      кол-во: &nbsp;
+      {{'кол-во'|_}}: &nbsp;
       <span id="recovery_line_count" x-ref="recovery_line_count">0
-      </span>&nbsp; акк.
+      </span>&nbsp;{{'акк.'|_}}
     </div>
   </div>
+
+  <p class="modal_type_title">
+    {{'Для новых аккаунтов'|_}}
+  </p>
+
+
+<div class="modal_type_download_blocks">
+  <label class="switch">
+    <input type="checkbox" name="data[for_new_accounts]" value="1" x-model="isForNewAccounts" x-on:change="forNewAccounts = isForNewAccounts?{{for_new_account}}:0" >
+    <span class="slider round"></span>
+  </label>
+  
+</div>
 
  {% partial '@_payment-fields' %}
   
   <p class="modal_type_title">
-    Сообщение
+    {{'Сообщение'|_}}
   </p>
-  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]">
+  <textarea rows="4" cols="50" placeholder="{{'Коментарий'|_}}" class="modal_type" name="data[message]">
   </textarea>
   <div class="modal_line">
   </div>
   <div class="modal_type_footer">
     <div class="modal_type_footer_summ">
-      <span x-text="Number(accountCount)*Number(sessionPrice)||0">
-      </span> рублей
+      <span x-text="Number(accountCount)*Number(sessionPrice)+Number(forNewAccounts)||0">
+      </span> {{'рублей'|_}}
      
     </div>
     <div class="modal_type_footer_line">
     </div>
     <button class="modal_type_footer_button">
       <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
-      Отправить запрос
+      {{'Отправить запрос'|_}}
     </button>
     <input type="hidden" name="data[account_count]" x-model="accountCount">   
   </div>

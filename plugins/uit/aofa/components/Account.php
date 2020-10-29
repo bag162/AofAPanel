@@ -2,6 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Uit\Aofa\Models\Key;
+use Lang;
 
 class Account extends ComponentBase
 {
@@ -25,10 +26,10 @@ class Account extends ComponentBase
 
 
     public function onLogin(){
-        $key = post('key', false);
-        if(!$key || trim($key) == "") return ['.container_message' => $this->renderPartial('@_message',['type' => 'error', 'message' => 'Введите свой API ключ'])];
-        $existsKey = Key::where('key', $key)->first();
-        if(is_null($existsKey)) return ['.container_message' => $this->renderPartial('@_message', ['type' => 'error', 'message' => 'Данного API ключа нет в базе AofA'])];
+        $key = post('key', false); //Введите свой API ключ
+        if(!$key || trim($key) == "") return ['.container_message' => $this->renderPartial('@_message',['type' => 'error', 'message' => Lang::get('uit.aofa::lang.message.enter_api_key')])];
+        $existsKey = Key::where('key', $key)->first(); //'Данного API ключа нет в базе AofA'
+        if(is_null($existsKey)) return ['.container_message' => $this->renderPartial('@_message', ['type' => 'error', 'message' => Lang::get('uit.aofa::lang.message.api_key_notexits') ])];
         
         if(!$existsKey->isActive()) return redirect()->to('locked');
         

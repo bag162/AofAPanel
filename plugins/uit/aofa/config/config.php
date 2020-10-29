@@ -2,6 +2,10 @@
 use Uit\Aofa\Models\Settings;
 $settings = Settings::instance();
 
+use RainLab\Translate\Models\Message;
+
+
+
 return [
     'payment_types' => [
         'balance' => 'С баланса',
@@ -27,7 +31,7 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric|min:'.$settings->get('min_buy_accounts'),
+                    'rule' => 'required|numeric|min:'.$settings->get('min_buy_accounts',0),
                     'label' => 'кол-во аккаунтов',
                 ],
                 [
@@ -39,27 +43,29 @@ return [
                     'name' => 'payment_method',
                     'rule' => 'required_if:payment_type,pay',
                     'label' => 'тип выполненного перевода',
-                ],
+                ],             
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
-                    'label' => 'дата перевода',
-                ],
-                [
-                    'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required_if:payment_type,pay|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
                 ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
+                ],
+
                 [
                     'name' => 'payment_check',
                     'rule' => 'max:5000',
                     'label' => 'чек, скриншот перевода',
                 ],
+
                 [
                     'name' => 'message',
                     'rule' => 'max:2000',
@@ -80,7 +86,7 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric|min:'.$settings->get('min_restore_accounts'),
+                    'rule' => 'required|numeric|min:'.$settings->get('min_restore_accounts',0),
                     'label' => 'кол-во аккаунтов',
                 ],
                 [
@@ -95,13 +101,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required_if:payment_type,pay|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',
@@ -142,18 +153,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
-                    'label' => 'дата перевода',
-                ],
-                [
-                    'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required_if:payment_type,pay|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',
@@ -179,8 +190,13 @@ return [
                 ],
                 [
                     'name' => 'account_count',
-                    'rule' => 'required|numeric|min:'.$settings->get('min_regsession_accounts'),
+                    'rule' => 'required|numeric|min:'.$settings->get('min_regsession_accounts',0),
                     'label' => 'кол-во аккаунтов',
+                ],
+                [
+                    'name' => 'for_new_accounts',
+                    'rule' => '',
+                    'label' => 'для новых аккаунтов',
                 ],
                 [
                     'name' => 'payment_type',
@@ -194,13 +210,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required_if:payment_type,pay|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',
@@ -227,13 +248,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',
@@ -279,18 +305,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
-                    'label' => 'дата перевода',
-                ],
-                [
-                    'name' => 'payment_date',
-                    'rule' => 'required_if:payment_type,pay',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required_if:payment_type,pay|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',
@@ -331,13 +357,18 @@ return [
                 ],
                 [
                     'name' => 'payment_date',
-                    'rule' => 'required',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|date|date_format:Y-m-d\TH:i',
                     'label' => 'дата перевода',
                 ],
                 [
                     'name' => 'payment_sum',
-                    'rule' => 'required|numeric',
+                    'rule' => 'required_if:payment_method,Банковская карта|required_if:payment_method,Qiwi|required_if:payment_method,WebMoney|numeric',
                     'label' => 'сумма перевода',
+                ],
+                [
+                    'name' => 'partner_code',
+                    'rule' => 'required_if:payment_method,Партнёрский код',
+                    'label' => 'партнёрский код',
                 ],
                 [
                     'name' => 'payment_check',

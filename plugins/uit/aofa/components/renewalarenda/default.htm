@@ -2,29 +2,29 @@
 
 <div x-data="{licenseCount:null, monthCount:null, arendaPrice:{{arenda_price}}, paymentMethod:'pay',paymentType:null}">
 <div class="modal_type_download_titles modal_type_download_titles_3">
-    <p>Кол-во лицензий</p>
-    <p>Срок продления</p>
+    <p>{{'Кол-во лицензий'|_}}</p>
+    <p>{{'Срок продления'|_}}</p>
 </div>
 <div class="modal_type_container">
-    <input placeholder="0 шт." type="text" class="modal_type_container_item" x-model="licenseCount" data-number name="data[license_count]" />
-    <input placeholder="0 мес." type="text" class="modal_type_container_item" x-model="monthCount" data-number name="data[month_count]" />
+    <input placeholder="0 {{'шт.'|_}}" type="text" class="modal_type_container_item" x-model="licenseCount" data-number name="data[license_count]" />
+    <input placeholder="0 {{'мес.'|_}}" type="text" class="modal_type_container_item" x-model="monthCount" data-number name="data[month_count]" />
 </div>
  {% partial '@_payment-fields' %}
-<p class="modal_type_title">Сообщение</p>
+<p class="modal_type_title">{{'Сообщение'|_}}</p>
 <textarea
     rows="4"
     cols="50"
-    placeholder="Коментарий"
+    placeholder="{{'Коментарий'|_}}"
     class="modal_type"
     name="data[message]" 
 ></textarea>
 <div class="modal_line"></div>
 <div class="modal_type_footer">
-    <div class="modal_type_footer_summ"><span x-text="Number(licenseCount)*Number(monthCount)*Number(arendaPrice)||0"></span> рублей</div>
+    <div class="modal_type_footer_summ"><span x-text="Number(licenseCount)*Number(monthCount)*Number(arendaPrice)||0"></span> {{'рублей'|_}}</div>
     <div class="modal_type_footer_line"></div>
     <button class="modal_type_footer_button" type="submit">
         <img src="/themes/aofa/assets/img/modal_icon2.png" alt="" />
-        Отправить запрос
+        {{'Отправить запрос'|_}}
     </button>
 </div>
 <div class="modal_line"></div>

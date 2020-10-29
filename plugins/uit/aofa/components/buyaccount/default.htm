@@ -3,39 +3,39 @@
 
 
 <div x-data="{accountCount:null, countryPrice:{{countries[0].price}},paymentMethod:'pay',paymentType:null }">
-  <p class="modal_type_title">Выбрать страну</p>
+  <p class="modal_type_title">{{'Выбрать страну'|_}}</p>
   <div class="modal_type_fields">
     {% for country in countries %}
-    <input {% if loop.first %}checked{% endif%} id="modal_1_country_{{loop.index}}" name="data[country]" type="radio" value="{{country.name}}" x-on:change="countryPrice = {{country.price}}"  >
-    <label for="modal_1_country_{{loop.index}}">{{country.name}} </label>
-    <label for="modal_1_country_{{loop.index}}">{{country.price}} руб./акк. </label>
+    <input {% if loop.first %}checked{% endif%} {% if country.block %} disabled {% endif %} id="modal_1_country_{{loop.index}}" name="data[country]" type="radio" value="{{country.name}}" x-on:change="countryPrice = {{country.price}}"  >
+    <label for="modal_1_country_{{loop.index}}" {% if country.block %} class="blocked" {% endif %}>{{country.name|_}} </label>
+    <label for="modal_1_country_{{loop.index}}" {% if country.block %} class="blocked" {% endif %}>{% if country.block %} {{'Нет в наличии'|_}} {% else %}{{country.price}} {{'руб./акк.'|_}} {% endif %}</label>
     {% endfor %}
   </div>
   <p class="modal_type_title">
-    Кол-во аккаунтов <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">минимальное кол-во аккаунтов для покупки: {{min_buy_accounts}}</small>
+    {{'Кол-во аккаунтов'|_}} <br>  <small style="color: gray; font-weight: normal;font-family: MazzardH-Light;">{{'минимальное кол-во аккаунтов для покупки:'|_}} {{min_buy_accounts}}</small>
   </p>
-  <input class="modal_solo_field" type="text"  placeholder="0 аккаунтов" name="data[account_count]" data-number x-model.number="accountCount"> 
+  <input class="modal_solo_field" type="text"  placeholder="0 {{'аккаунтов'|_}}" name="data[account_count]" data-number x-model.number="accountCount"> 
  
   
   {% partial '@_payment-fields' %}
 
   <p class="modal_type_title">
-    Сообщение
+    {{'Сообщение'|_}}
   </p>
-  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]"></textarea>
+  <textarea rows="4" cols="50" placeholder="{{'Коментарий'|_}}" class="modal_type" name="data[message]"></textarea>
   <div class="modal_line"></div>
 
   <div class="modal_type_footer">
     <div class="modal_type_footer_summ">
       <span x-text="Number(accountCount)*Number(countryPrice)||0">
-      </span> рублей
+      </span> {{'рублей'|_}}
      
     </div>
     <div class="modal_type_footer_line">
     </div>
     <button class="modal_type_footer_button">
       <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
-      Отправить запрос
+      {{'Отправить запрос'|_}}
     </button>
   </div>
 

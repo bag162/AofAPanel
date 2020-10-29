@@ -10,6 +10,8 @@ use Validator;
 use ValidationException;
 use System\Models\File;
 use Config;
+use Lang;
+use RainLab\Translate\Models\Message;
 
 class AddBalance extends ComponentBase
 {
@@ -28,6 +30,18 @@ class AddBalance extends ComponentBase
 
     public function onAddBalance()
     {
+        if(session()->has('auth_key')) {
+            $auth_key = session()->get('auth_key');
+            $existsKey = \Uit\Aofa\Models\Key::where('key', $auth_key)->first();
+            if(!is_null($existsKey)){
+                if(!$existsKey->isActive()) {
+                    return redirect()->to('locked');
+                }              
+            }
+        }else{
+            return redirect()->to('login');
+        }
+
         $data = Input::all()['data'];
 
         $rules = [];
@@ -44,11 +58,12 @@ class AddBalance extends ComponentBase
                 }
 
                 if ($field['label'] && !empty($field['label'])) {
-                    $attributes[$field['name']] = $field['label'];
+                    $attributes[$field['name']] = Message::trans( $field['label'], [], null); 
                 }
             }
         }
 
+   
         $validator = Validator::make($data, $rules, [], $attributes);
 
         if ($validator->fails()) {
@@ -86,7 +101,7 @@ class AddBalance extends ComponentBase
         return [
             '.container_message' => $this->renderPartial('@_message', [
                 'type' => 'success',
-                'message' => 'Ваш запрос успешно отправлен',
+                'message' => Lang::get('uit.aofa::lang.message.request_success'),
             ]),
         ];
     }

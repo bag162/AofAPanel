@@ -11,6 +11,8 @@ use ValidationException;
 use System\Models\File;
 use Config;
 use ApplicationException;
+use Lang;
+use RainLab\Translate\Models\Message;
 
 class AdminServer extends ComponentBase
 {
@@ -31,6 +33,18 @@ class AdminServer extends ComponentBase
 
     public function onAdminServer()
     {
+        if(session()->has('auth_key')) {
+            $auth_key = session()->get('auth_key');
+            $existsKey = \Uit\Aofa\Models\Key::where('key', $auth_key)->first();
+            if(!is_null($existsKey)){
+                if(!$existsKey->isActive()) {
+                    return redirect()->to('locked');
+                }
+            }
+        }else{
+            return redirect()->to('login');
+        }
+
         $data = Input::all()['data'];
 
         $rules = [];
@@ -48,7 +62,7 @@ class AdminServer extends ComponentBase
                 }
 
                 if ($field['label'] && !empty($field['label'])) {
-                    $attributes[$field['name']] = $field['label'];
+                    $attributes[$field['name']] = Message::trans( $field['label'], [], null); 
                 }
             }
         }
@@ -90,7 +104,7 @@ class AdminServer extends ComponentBase
         $total = $data['server_count']*$data['week_count']*$serverPrice;
 
         if($data['payment_type'] == 'balance'){
-            if($this->getBalance() < $total) throw new ApplicationException('Пожалуйста пополните баланс!');
+            if($this->getBalance() < $total) throw new ApplicationException(Lang::get('uit.aofa::lang.message.balance_enough')); //'Пожалуйста пополните баланс!'
 
             (new Key)->balanceMinus($this->getKey(), $total);
             $order->status_id = 2;
@@ -112,7 +126,7 @@ class AdminServer extends ComponentBase
         return [
             '.container_message' => $this->renderPartial('@_message', [
                 'type' => 'success',
-                'message' => 'Ваш запрос успешно отправлен',
+                'message' => Lang::get('uit.aofa::lang.message.request_success'),
             ]),
         ];
     }

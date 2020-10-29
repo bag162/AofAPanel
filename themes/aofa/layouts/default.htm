@@ -3,14 +3,17 @@ description = "Default layout"
 [account]
 
 [faqList]
+
+[localePicker]
+forceUrl = 0
 ==
 <!DOCTYPE html>
 <html>
-    <head>
+    <head lang="{{activeLocale}}">
         <meta charset="utf-8">
-        <title>AofA SMS Service - {{ this.page.title }}</title>
-        <meta name="description" content="{{ this.page.meta_description }}">
-        <meta name="title" content="{{ this.page.meta_title }}">
+        <title>AofA SMS Service - {{ this.page.title|_ }}</title>
+        <meta name="description" content="{{ this.page.meta_description|_ }}">
+        <meta name="title" content="{{ this.page.meta_title|_ }}">
         <meta name="author" content="AOFA">
        
 
@@ -32,7 +35,9 @@ description = "Default layout"
         {% styles %}
     </head>
     <body>
-
+        <div class="lang-picker">
+            <a href="#" {% if activeLocale == 'ru'  %} class="active" {% endif %} data-request="onSwitchLocale" data-request-data="locale:'ru'">RU</a>/<a href="#" {% if activeLocale == 'en'  %} class="active" {% endif %} data-request="onSwitchLocale" data-request-data="locale:'en'">EN</a>
+        </div>
         {% page %}
         <!-- Scripts -->
         {% partial 'pricelist' %}

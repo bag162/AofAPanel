@@ -8,6 +8,8 @@ use Validator;
 use ValidationException;
 use System\Models\File;
 use Config;
+use Lang;
+use RainLab\Translate\Models\Message;
 
 class OrderForm extends ComponentBase
 {
@@ -58,7 +60,7 @@ class OrderForm extends ComponentBase
                 }
 
                 if(isset($vrules['label'])){
-                    $attributes[$vrules['field']] = $vrules['label'];
+                    $attributes[$vrules['field']] = Message::trans( $vrules['label'], [], null); 
                 }
             }
         }
@@ -99,7 +101,7 @@ class OrderForm extends ComponentBase
         $order->status_id = 1;
         $order->save();
 
-        return ['.container_message' => $this->renderPartial('@_message', ['type' => 'success', 'message' => 'Ваш запрос успешно отправлен'])];
+        return ['.container_message' => $this->renderPartial('@_message', ['type' => 'success', 'message' => Lang::get('uit.aofa::lang.message.request_success'),])];
 
 
     }

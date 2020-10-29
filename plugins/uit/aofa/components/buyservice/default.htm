@@ -1,29 +1,33 @@
 {% set formClass = 'type-form modal_type_'~type.id~' animated  fadeIn '  %}
 
 <div x-data="{paymentType:null }">
-{{ form_ajax('onBuyService', { class: formClass, 'data-request-files':' ', 'data-request-flash':' ', 'data-request-success':'this.reset()'}) }}
+{{ form_ajax('onBuyService', { class: formClass, 'data-request-files':' ', 'data-request-flash':' ', 'data-request-success':'this.reset(); window.scrollTo(0,document.body.scrollHeight)'}) }}
         		<p class="wow fadeInUp modal_title animated" style="visibility: visible; animation-name: fadeInUp;">
-        			Выбрать подходящую покупку
+        			{{'Выбрать подходящую покупку'|_}}
         		</p>
         		<div class="wow fadeInUp modal_radio animated" style="visibility: visible; animation-name: fadeInUp;">
         			<input id="byes_1" type="radio" name="byes" checked="">
-        			<label for="byes_1">Купить ПО AofA SMS Service</label>
+        			<label for="byes_1">{{'Купить ПО AofA SMS Service'|_}}</label>
         		
         		</div>
         		<p class="modal_title wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-        			Ваши контакты
+        			{{'Ваши контакты'|_}}
         		</p>
         		<div class="form_contacts wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-        			<input type="name" name="data[name]" placeholder="Имя" >
+        			<input type="name" name="data[name]" placeholder="{{'Имя'|_}}" >
         			<input type="text" name="data[phone]" placeholder="Telegram" >
-        			<input type="email" name="data[email]" placeholder="Почта" >
+        			<input type="email" name="data[email]" placeholder="{{'Почта'|_}}" >
         		</div>
-        		 {% partial '@_payment-methods.htm' %}
+				 {% partial '@_payment-methods.htm' %}
+				 
+				<div>
+					{% component 'recaptcha' %}
+				</div>
 
                 <input type="hidden" name="data[order_type]" value="7">
-        		<button type="submit" class="modal_send_button wow adeInUp animated" style="visibility: visible;">
+        		<button type="submit" class="modal_send_button wow adeInUp animated buy-service-btn" style="visibility: visible;">
         			<img src="/themes/aofa/assets/img/modal_icon1.png" alt="">
-        			Отправить запрос
+        			{{'Отправить запрос'|_}}
         		</button>
 {{ form_close() }}
 </div>

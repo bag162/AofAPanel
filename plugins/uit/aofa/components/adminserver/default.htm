@@ -2,7 +2,7 @@
 {% set price_sms_admin = aofa_settings('price_sms_admin') %}
 <div  x-data="{priceTnmanager: {{price_tnmanager_admin}}, priceSms: {{price_sms_admin}}, checkedServer:'tnmanager', serverCount: null, weekCount:null, paymentMethod:'pay',paymentType:null}" >
 <p class="modal_type_title">
-        			Тип администрируемого ПО 
+        			{{'Тип администрируемого ПО'|_}}
         		</p>
   <div class="modal_type_fields modal_type_field modal_type_fielded">
     <input id="modal_6_country_1" name="data[admin_server]" type="radio" value="tnmanager" x-model="checkedServer">
@@ -15,22 +15,22 @@
 
   <div class="modal_type_download_titles modal_type_download_titles_2">
         			<p>
-        				Кол-во серверов
+        				{{'Кол-во серверов'|_}}
         			</p>
         			<p>
-        				Срок продления  
+        				{{'Срок продления'|_}} 
         			</p>
         		</div>
 <div class="modal_type_container">
-        			<input placeholder="0 шт." type="text" class="modal_type_container_item" data-number name="data[server_count]" x-model="serverCount">
-        			<input placeholder="0 нед." type="text" class="modal_type_container_item" data-number  name="data[week_count]" x-model="weekCount">
+        			<input placeholder="0 {{'шт.'|_}}" type="text" class="modal_type_container_item" data-number name="data[server_count]" x-model="serverCount">
+        			<input placeholder="0 {{'нед.'|_}}" type="text" class="modal_type_container_item" data-number  name="data[week_count]" x-model="weekCount">
         		</div>
 
             {% partial '@_payment-fields' %}
   <p class="modal_type_title">
-    Сообщение
+    {{'Сообщение'|_}}
   </p>
-  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]">
+  <textarea rows="4" cols="50" placeholder="{{'Коментарий'|_}}" class="modal_type" name="data[message]">
   </textarea>
   <div class="modal_line">
   </div>
@@ -41,13 +41,13 @@
       <span x-show="checkedServer === 'smsservice'" x-text="Number(serverCount)*Number(weekCount)*Number(priceSms)||0"></span>
       
       
-       рублей
+       {{'рублей'|_}}
     </div>
     <div class="modal_type_footer_line">
     </div>
     <button class="modal_type_footer_button">
       <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
-      Отправить запрос
+      {{'Отправить запрос'|_}}
     </button> 
   </div>
   <div class="modal_line">

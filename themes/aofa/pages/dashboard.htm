@@ -17,6 +17,7 @@ function onStart(){
                 if(!$existsKey->isActive()) {
                     return redirect()->to('locked');
                 }
+                $this['auth'] = $existsKey;
             }
         }else{
             return redirect()->to('login');
@@ -32,8 +33,22 @@ function onStart(){
 			{% partial 'header' %}
 
         	<p class="modal_title wow  fadeInUp">
-				Панель управления
+				{{'Панель управления'|_}}
 			</p>
+			
+			
+			
+			<div class="download-app">
+			    <a href="{{auth.sms_url}}" target="_blank" class="modal_balance_payment">
+        				<span>{{'Скачать SMS Service'|_}}</span>
+        	</a>
+        			
+        	<a href="{{auth.tn_url}}" target="_blank"  class="modal_balance_payment">
+        				<span>{{'Скачать TNManager'|_}}</span>
+        	</a>
+			</div>
+        			
+        			
 		    {% component 'orders' %}
 			<div class="modal_line wow  fadeInUp"></div>
 		

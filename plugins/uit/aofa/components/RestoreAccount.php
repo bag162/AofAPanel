@@ -11,6 +11,8 @@ use ValidationException;
 use System\Models\File;
 use Config;
 use ApplicationException;
+use Lang;
+use RainLab\Translate\Models\Message;
 
 class RestoreAccount extends ComponentBase
 {
@@ -34,6 +36,18 @@ class RestoreAccount extends ComponentBase
 
     public function onRestoreAccount()
     {
+        if(session()->has('auth_key')) {
+            $auth_key = session()->get('auth_key');
+            $existsKey = \Uit\Aofa\Models\Key::where('key', $auth_key)->first();
+            if(!is_null($existsKey)){
+                if(!$existsKey->isActive()) {
+                    return redirect()->to('locked');
+                }
+            }
+        }else{
+            return redirect()->to('login');
+        }
+
         $data = Input::all()['data'];
 
         $rules = [];
@@ -50,7 +64,7 @@ class RestoreAccount extends ComponentBase
                 }
 
                 if ($field['label'] && !empty($field['label'])) {
-                    $attributes[$field['name']] = $field['label'];
+                    $attributes[$field['name']] = Message::trans( $field['label'], [], null);
                 }
             }
         }
@@ -84,7 +98,7 @@ class RestoreAccount extends ComponentBase
         $total = $data['account_count']*$restore_price;
 
         if($data['payment_type'] == 'balance'){
-            if($this->getBalance() < $total) throw new ApplicationException('Пожалуйста пополните баланс!'); 
+            if($this->getBalance() < $total) throw new ApplicationException(Lang::get('uit.aofa::lang.message.balance_enough')); 
 
             (new Key)->balanceMinus($this->getKey(), $total);
             $order->status_id = 2;
@@ -107,7 +121,7 @@ class RestoreAccount extends ComponentBase
         return [
             '.container_message' => $this->renderPartial('@_message', [
                 'type' => 'success',
-                'message' => 'Ваш запрос успешно отправлен',
+                'message' =>  Lang::get('uit.aofa::lang.message.request_success'),
             ]),
         ];
     }

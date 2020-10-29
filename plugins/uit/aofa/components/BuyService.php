@@ -11,6 +11,10 @@ use ValidationException;
 use System\Models\File;
 use Config;
 use ApplicationException;
+use Lang;
+use RainLab\Translate\Models\Message;
+use Multiwebinc\Recaptcha\Validators\RecaptchaValidator;
+
 
 class BuyService extends ComponentBase
 {
@@ -31,13 +35,20 @@ class BuyService extends ComponentBase
 
     public function onBuyService()
     {
+    
+
         $data = Input::all()['data'];
+        $data['g-recaptcha-response'] = post('g-recaptcha-response');
 
         $rules = [];
         $attributes = [];
 
         $orderType = OrderType::findOrFail($data['order_type']);
-        
+
+        $rules['g-recaptcha-response']  = [
+            'required',
+            new RecaptchaValidator,
+        ];
 
         if (
             $orderType->fields
@@ -48,10 +59,11 @@ class BuyService extends ComponentBase
                 }
 
                 if ($field['label'] && !empty($field['label'])) {
-                    $attributes[$field['name']] = $field['label'];
+                    $attributes[$field['name']] = Message::trans( $field['label'], [], null); 
                 }
             }
         }
+
 
         $validator = Validator::make($data, $rules, [], $attributes);
 
@@ -80,7 +92,7 @@ class BuyService extends ComponentBase
         //Number(accountCount)*Number(countryPrice)
         // $countries = collect(Settings::get('countries'));
    
-        $total = $data['payment_sum'];
+        $total = isset($data['payment_sum'])?$data['payment_sum']:0;
 
         
 
@@ -96,7 +108,7 @@ class BuyService extends ComponentBase
         return [
             '.container_message' => $this->renderPartial('@_message', [
                 'type' => 'success',
-                'message' => 'Ваш запрос успешно отправлен',
+                'message' => Lang::get('uit.aofa::lang.message.request_success'),
             ]),
         ];
     }

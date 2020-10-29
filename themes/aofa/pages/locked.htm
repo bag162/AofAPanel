@@ -8,15 +8,15 @@ is_hidden = 0
         	<div class="wow  fadeInDown modal_header ">
         		<img src="{{'assets/img/log_modal.png'|theme}}" alt="">
         		<a href="{{'home'|page}}" class="modal_button_panel">
-        			Перейти в панель оплаты
+        			{{'Перейти в панель оплаты'|_}}
         		</a>
         	</div>
         	<form action="" class="modal_api wow  fadeInUp">
         		<p class="modal_title modal_big_title">
-            		APIKey Заблокирован
+            	 {{'APIKey Заблокирован'|_}}
             	</p>
             	<div class="modal_api_conteiner">
-            		<button class="modal_big_submit" type="submit">Обратиться к администратору</button>
+            		<a href="{{aofa_settings('social_telegram')}}" target="_blank" class="modal_big_submit" type="submit">{{'Обратиться к администратору'|_}}</a>
             	</div>
         	</form>
 		</div>
@@ -24,7 +24,7 @@ is_hidden = 0
 			<div id="message_modal_success" class="message_modal message_success">
 				<div class="message_modal_container">
 					<p class="message_modal_title">
-						Ваш запрос успешно отправлен
+						{{'Ваш запрос успешно отправлен'|_}}
 					</p>
 					<div id="message_cross_success" class=" message_modal_cross"></div>
 				</div>

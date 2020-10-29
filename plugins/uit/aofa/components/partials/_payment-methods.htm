@@ -1,50 +1,48 @@
-
-  <div>
- <div class="container_modal_title wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-        			<p class="modal_title">
-        				Тип выполненного перевода
-        			</p>
-              {% if this.page.id == 'home' %}
-                    <a href="#modal_footer" class="modal_pricelist_button">
-                        Прайс лист
-                    </a> 
-
-                    {% endif %}
-        		</div>
-    <div class="modul_button_pay modal_type_dop" :class="{'active':paymentType}">
-      Реквизиты для перевода
-    </div>
-    <div class="modal_first modal_wrapper">
-      <div class="dm-table">
-        <div class="dm-cell">
-          <div class="modal_content">
-            <div class="modal_header">
-              <img src="/themes/aofa/assets/img/log_modal.png" alt="">
-            </div>
-            <p class="modal_title modal_title_acaunt">
-              Выберете способ оплаты
-            </p>
-            <div class="modal_items">
-              {% set payments = aofa_settings('payments') %}
-              {% for payment in payments %}
-              <input id="payment_{{loop.index}}" type="radio" name="data[payment_method]" value="{{payment.name}}" x-model="paymentType">
-              <label for="payment_{{loop.index}}"> 
-                <img src="{{payment.logo|media}}" alt="{{payment.name}}"> {{payment.uid}}
-              </label>
-              {% endfor %} 
-            </div>
-            <button class="modal_button_form" type="button">
-              Выбрать оплату
-            </button>
+<div>
+  <div class="container_modal_title" >
+    <p class="modal_title">
+      {{'Тип выполненного перевода'|_}}
+    </p>
+    {% if this.page.id == 'home' %}
+    <a href="#modal_footer" class="modal_pricelist_button">
+      {{'Прайс лист'|_}}
+    </a> 
+    {% endif %}
+  </div>
+  <div class="modul_button_pay modal_type_dop" :class="{'active':paymentType}">
+    {{'Реквизиты для перевода'|_}}
+  </div>
+  <div class="modal_first modal_wrapper">
+    <div class="dm-table">
+      <div class="dm-cell">
+        <div class="modal_content">
+          <div class="modal_header">
+            <img src="/themes/aofa/assets/img/log_modal.png" alt="">
           </div>
+          <p class="modal_title modal_title_acaunt">
+            {{'Выберите способ оплаты'|_}}
+          </p>
+          <div class="modal_items">
+            {% set payments = aofa_settings('payments') %}
+            {% for payment in payments %}
+            <input id="payment_{{loop.index}}" type="radio" name="data[payment_method]" value="{{payment.name}}" x-model="paymentType">
+            <label for="payment_{{loop.index}}"> 
+              <img src="{{payment.logo|media}}" alt="{{payment.name}}"> {{payment.uid|_}}
+            </label>
+            {% endfor %} 
+          </div>
+          <button class="modal_button_form" type="button">
+            {{'Выбрать оплату'|_}}
+          </button>
         </div>
       </div>
     </div>
-
+  </div>
+  <template  x-if="paymentType != 'Партнёрский код'">
     <div class="modal_type_dop form_contacts form_contacts_type">
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Дата перевода 
+          {{'Дата перевода'|_}}
           <span>*
           </span>
         </p>
@@ -52,22 +50,32 @@
       </div>
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Сумма перевода
+          {{'Сумма перевода'|_}}
           <span>*
           </span>
         </p>
-        <input  class="modal_date_dop modal_summ" type="modal_1_summ_1" placeholder="0 руб." name="data[payment_sum]">
+        <input  class="modal_date_dop modal_summ" type="modal_1_summ_1" placeholder="0 {{'руб'|_}}." name="data[payment_sum]">
       </div>
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Чек, скриншот перевода
+          {{'Чек, скриншот перевода'|_}}
         </p>
-        <input class="moodal_dn" id="modal_1_download_2" type="file" name="data[payment_check]" onchange="fileSelected(this, '.modal_file')" >
+        <input class="moodal_dn" id="modal_1_download_2" type="file" name="data[payment_check]" onchange="fileSelected(this, '.modal_file')">
         <label class="modal_file" for="modal_1_download_2">
           <img src="/themes/aofa/assets/img/downalade_icon.png" alt="">
-          Загрузить
+          {{'Загрузить'|_}}
         </label>
       </div>
     </div>
-  </div>
-
+  </template>
+  <template x-if="paymentType === 'Партнёрский код'" >
+    <div div class="form_contacts_container">
+      <p class="modal_type_title">
+        {{'Партнёрский код'|_}}
+        <span>*
+        </span>
+      </p>
+      <input class="modal_solo_field" type="text" placeholder="" name="data[partner_code]" style="width: 320px;" >
+    </div>
+  </template>
+</div>

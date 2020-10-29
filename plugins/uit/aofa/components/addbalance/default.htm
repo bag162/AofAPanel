@@ -4,19 +4,19 @@
 
 
   <div>
- <div class="container_modal_title wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-        			<p class="modal_title">
-        				Тип выполненного перевода
+ <div class="container_modal_title " >
+        			<p class="modal_type_title modal_type_dop">
+        				{{'Тип выполненного перевода'|_}}
         			</p>
               {% if this.page.id == 'home' %}
                     <a href="#modal_footer" class="modal_pricelist_button">
-                        Прайс лист
+                        {{'Прайс лист'|_}}
                     </a> 
 
                     {% endif %}
         		</div>
     <div class="modul_button_pay modal_type_dop">
-      Реквизиты для перевода
+      {{'Реквизиты для перевода'|_}}
     </div>
     <div class="modal_first modal_wrapper">
       <div class="dm-table">
@@ -26,19 +26,19 @@
               <img src="/themes/aofa/assets/img/log_modal.png" alt="">
             </div>
             <p class="modal_title modal_title_acaunt">
-              Выберете способ оплаты
+              {{'Выберите способ оплаты'|_}}
             </p>
             <div class="modal_items">
               {% set payments = aofa_settings('payments') %}
               {% for payment in payments %}
               <input {% if loop.first %} checked {% endif %} id="payment_{{loop.index}}" type="radio" name="data[payment_method]" value="{{payment.name}}">
               <label for="payment_{{loop.index}}"> 
-                <img src="{{payment.logo|media}}" alt="{{payment.name}}"> {{payment.uid}}
+                <img src="{{payment.logo|media}}" alt="{{payment.name}}"> {{payment.uid|_}}
               </label>
               {% endfor %}
             </div>
             <button class="modal_button_form" type="button">
-              Выбрать оплату
+              {{'Выбрать оплату'|_}}
             </button>
           </div>
         </div>
@@ -47,7 +47,7 @@
     <div class="modal_type_dop form_contacts form_contacts_type">
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Дата перевода 
+         {{'Дата перевода'|_}}
           <span>*
           </span>
         </p>
@@ -55,20 +55,20 @@
       </div>
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Сумма перевода
+          {{'Сумма перевода'|_}}
           <span>*
           </span>
         </p>
-        <input  class="modal_date_dop modal_summ" type="modal_1_summ_1" placeholder="0 руб." name="data[payment_sum]" x-model="sum">
+        <input  class="modal_date_dop modal_summ" type="modal_1_summ_1" placeholder="0 {{'руб.'|_}}" name="data[payment_sum]" x-model="sum">
       </div>
       <div class="form_contacts_container">
         <p class="modal_title_field">
-          Чек, скриншот перевода
+          {{'Чек, скриншот перевода'|_}}
         </p>
         <input class="moodal_dn" id="modal_1_download_2" type="file" name="data[payment_check]">
         <label class="modal_file" for="modal_1_download_2">
           <img src="/themes/aofa/assets/img/downalade_icon.png" alt="">
-          Загрузить
+          {{'Загрузить'|_}}
         </label>
       </div>
     </div>
@@ -77,23 +77,23 @@
 
   
   <p class="modal_type_title">
-    Сообщение
+    {{'Сообщение'|_}}
   </p>
-  <textarea rows="4" cols="50" placeholder="Коментарий" class="modal_type" name="data[message]">
+  <textarea rows="4" cols="50" placeholder="{{'Коментарий'|_}}" class="modal_type" name="data[message]">
   </textarea>
   <div class="modal_line">
   </div>
   <div class="modal_type_footer">
     <div class="modal_type_footer_summ">
       <span x-text="Number(sum)||0">
-      </span> рублей
+      </span> {{'рублей'|_}}
      
     </div>
     <div class="modal_type_footer_line">
     </div>
     <button class="modal_type_footer_button">
       <img src="/themes/aofa/assets/img/modal_icon2.png" alt="">
-      Отправить запрос
+      {{'Отправить запрос'|_}}
     </button> 
   </div>
   <div class="modal_line">

@@ -6,12 +6,12 @@
       style="visibility: visible; animation-name: fadeInUp"
       >
       <div class="modal_panel_item_head">
-         <p class="modal_panel_item_title">{{order.type.label}}</p>
-         <p class="modal_panel_item_date">Дата заявки: {{order.created_at|date('d.m.Y')}}</p>
+         <p class="modal_panel_item_title">{{order.type.label|_}}</p>
+         <p class="modal_panel_item_date">{{'Дата заявки'|_}}: {{order.created_at|date('d.m.Y')}}</p>
          {% if position == 1 and order.status_id == 2 %}
-         <div class="modal_panel_item_state" style="background: orange ">Исполняется</div>
+         <div class="modal_panel_item_state" style="background: orange ">{{'Исполняется'|_}}</div>
          {% else %}
-         <div class="modal_panel_item_state" style="background: {{order.status.color}} ">{{order.status.name}}</div>
+         <div class="modal_panel_item_state" style="background: {{order.status.color}} ">{{order.status.name|_}}</div>
          {% endif %}
       </div>
       <div class="modal_panel_item_line"></div>
@@ -22,19 +22,59 @@
       {% if order.files  or order.note   %}
       <div class="modal_panel_item_line"></div>
       <div class="modal_panel_item_footer">
-         {% if order.files %}
-         {% for file in order.files %}
-         <a
-            class="modal_panel_item_loading"
-            href="{{file.path}}"
-            download=""
-            >Скачать файл</a
-            >
-         {% endfor %}
+
+         {% if order.type_id !=  4  %}
+            {% if order.files %}
+               {% for file in order.files %}
+               <a
+                  class="modal_panel_item_loading"
+                  href="{{file.path}}"
+                  download=""
+                  >{{'Скачать файл'|_}}</a
+                  >
+               {% endfor %}
+            {% endif %}
+         {% else %}
+
+            {% if order.files %}
+                  {% for file in order.files %}
+                  <div class="session-info-download">
+                  <span style="color: #7e7e7e;">{{'Валидных'|_}} </span> <span style="color: #1e87f0; font-family: MazzardH-Bold;">{{order.fileLinesCount(file.id)}}</span>
+                  <a
+                     class="modal_panel_item_loading"
+                     href="{{file.path}}"
+                     download=""
+                     title="{{'Скачать'|_}}"
+                     ><img src="/themes/aofa/assets/img/downalade_icon.png" alt=""></a>
+
+                  </div>
+                  {% endfor %}
+            {% endif %}
+
+           
+            {% if order.notvalidfiles %}
+               {% for file in order.notvalidfiles %}
+              <div class="session-info-download">
+               <span style="color: #7e7e7e; ">{{'Не валидных'|_}} </span> <span style="color: #1e87f0; font-family: MazzardH-Bold;">{{order.fileLinesCount(file.id)}}</span>
+              <a
+                  class="modal_panel_item_loading" title="{{'Скачать'|_}}"
+                  href="{{file.path}}"
+                  download="" 
+                  ><img src="/themes/aofa/assets/img/downalade_icon.png" alt=""></a>
+
+
+                  </div>
+               {% endfor %}
+            {% endif %}
          {% endif %}
+
+
+
+
+
          {% if order.note and order.type_id != 6 and order.note and order.type_id != 5   %}
          <p class="modal_panel_item_admincomment">
-            *Администратор: {{order.note}}
+            *{{'Администратор'|_}}: {{order.note}}
          </p>
          {% endif %}
       </div>
@@ -43,7 +83,22 @@
 
    </div>
    {% else %}
-   <p>Список заявок пуст</p>
+   <p>{{'Список заявок пуст'|_}}</p>
    {% endfor %}
    {{ orders.render()|raw }}
 </div>
+{% put scripts %}
+<script>
+jQuery(document).ready(function ($) {
+ $(window).on('ajaxComplete', function (context, data, textStatus, jqXHR) {
+    {% if activeLocale == 'en' %}
+      var msg = textStatus.responseJSON['X_OCTOBER_ERROR_MESSAGE'].replace('Банковская карта', '{{'Банковская карта'|_}}').replace('Партнёрский код', '{{'Партнёрский код'|_}}').replace('файл с аккаунтами','{{'файл с аккаунтами'|_}}');
+      console.log(msg);
+      $('.flash-message').text(msg);
+   {% endif %}
+   //console.log();
+           
+  });
+});
+</script>
+{% endput %}

@@ -2,11 +2,11 @@
 <div class="modal_faq modal_wrapper">
         <div class="dm-table">
             <div class="dm-cell">
-                <div class="modal_content" x-data="{opened:1}">
+                <div class="modal_content" x-data="{opened:null}">
                     <div class="modal_header">
                         <img src="{{'assets/img/log_modal.png'|theme}}" alt="">
                         <div class="modal_close_button">
-                            Закрыть
+                            {{'Закрыть'|_}}
                         </div>
                     </div>
                     <p class="modal_title modal_title_acaunt">
@@ -15,7 +15,7 @@
                     
                     {% for item in faqs %}
                        <div class="faq-item faq-item-{{loop.index}}" :class="{'opened': opened === {{loop.index}}}" >
-                           <div class="faq__question" @click="opened = {{loop.index}}">
+                           <div class="faq__question" @click="opened = (opened != {{loop.index}})?{{loop.index}}:null">
                                <p>{{item.question}}</p>
                                
                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -28,13 +28,13 @@
                                 </svg>
                            </div>
                            <div class="faq__answer">
-                               {{item.answer}}
+                               <p>{{item.answer|nl2br}}</p>
                            </div>                           
                        </div>
                     {% endfor %}
                   
                     <div class="modal_close_button">
-                        Закрыть
+                        {{'Закрыть'|_}}
                     </div>  
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 use Model;
 use Config;
+use System\Models\File;
 /**
  * Model
  */
@@ -55,7 +56,8 @@ class Order extends Model
 
 
     public $attachMany = [
-        'files' => 'System\Models\File'
+        'files' => 'System\Models\File',
+        'notvalidfiles' => 'System\Models\File',   
     ];
 
     public function getTypeIdOptions(){
@@ -91,7 +93,10 @@ class Order extends Model
     public function getPosition(){
         $position = 0;
         if ($this->type_id == self::ORDER_TYPES['BUY_ACCOUNT'] && $this->status_id == self::ORDER_STATUS['PAYED'] 
-         || $this->type_id == self::ORDER_TYPES['RESTORE_ACCOUNT'] && $this->status_id == self::ORDER_STATUS['PAYED'] ){
+         || $this->type_id == self::ORDER_TYPES['RESTORE_ACCOUNT'] && $this->status_id == self::ORDER_STATUS['PAYED']
+         || $this->type_id == self::ORDER_TYPES['REGISTER_SESSION'] && $this->status_id == self::ORDER_STATUS['PAYED']
+         
+         ){
             $orders = self::where('status_id', $this->status_id)->where('type_id', $this->type_id)->orderBy('created_at', 'asc')->get();
        
             $position = $orders->search(function($order) {
@@ -104,6 +109,27 @@ class Order extends Model
 
     public function scopeBystatus($query, $status_id){
         return $query->where('status_id', $status_id);
+    }
+
+
+
+
+    public function fileLinesCount($id){
+        $file = File::find($id);
+
+        if($file){
+            $path = $file->path;
+            $linecount = 0;
+            $handle = fopen($path, "r");
+                while(!feof($handle)){
+                $line = fgets($handle);
+                $linecount++;
+            }
+
+            fclose($handle);
+        }
+
+        return $linecount;
     }
 
 
